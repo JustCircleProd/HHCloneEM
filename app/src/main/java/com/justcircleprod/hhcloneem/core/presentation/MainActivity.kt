@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.justcircleprod.hhcloneem.core.presentation.components.NavigationItem
+import com.justcircleprod.hhcloneem.core.presentation.components.bottomNavigation.BottomNavigationBar
 import com.justcircleprod.hhcloneem.core.presentation.ui.theme.HHCloneEMTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,10 +24,13 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HHCloneEMTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Surface {
-                        val navController = rememberNavController()
+                val navController = rememberNavController()
 
+                Scaffold(
+                    bottomBar = { BottomNavigationBar(navController) },
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    Surface {
                         NavHost(
                             navController,
                             startDestination = NavigationItem.Search.route,
@@ -36,6 +40,15 @@ class MainActivity : ComponentActivity() {
 
                             }
                             composable(NavigationItem.Favourite.route) {
+
+                            }
+                            composable(NavigationItem.Responses.route) {
+
+                            }
+                            composable(NavigationItem.Messages.route) {
+
+                            }
+                            composable(NavigationItem.Profile.route) {
 
                             }
                         }
