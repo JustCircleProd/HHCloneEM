@@ -14,7 +14,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.justcircleprod.hhcloneem.core.presentation.components.NavigationItem
 import com.justcircleprod.hhcloneem.core.presentation.components.bottomNavigation.BottomNavigationBar
-import com.justcircleprod.hhcloneem.core.presentation.ui.theme.HHCloneEMTheme
+import com.justcircleprod.hhcloneem.core.presentation.theme.HHCloneEMTheme
+import com.justcircleprod.hhcloneem.search.presentation.SearchScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,10 +35,12 @@ class MainActivity : ComponentActivity() {
                         NavHost(
                             navController,
                             startDestination = NavigationItem.Search.route,
-                            modifier = Modifier.fillMaxSize().padding(innerPadding)
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(innerPadding)
                         ) {
                             composable(NavigationItem.Search.route) {
-
+                                SearchScreen()
                             }
                             composable(NavigationItem.Favourite.route) {
 

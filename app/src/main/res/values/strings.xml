@@ -6,4 +6,7 @@
     <string name="responses">Отклики</string>
     <string name="messages">Сообщения</string>
     <string name="profile">Профиль</string>
+    
+    <string name="search_placeholder">Должность, ключевые слова</string>
+    <string name="filters">Фильтры</string>
 </resources>

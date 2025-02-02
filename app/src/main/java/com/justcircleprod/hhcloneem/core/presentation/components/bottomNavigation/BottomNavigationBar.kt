@@ -1,6 +1,5 @@
 package com.justcircleprod.hhcloneem.core.presentation.components.bottomNavigation
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
@@ -14,17 +13,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.justcircleprod.hhcloneem.core.presentation.ui.theme.Grey2
-import com.justcircleprod.hhcloneem.core.presentation.ui.theme.Grey4
-import com.justcircleprod.hhcloneem.core.presentation.ui.theme.Red
-import com.justcircleprod.hhcloneem.core.presentation.ui.theme.SFProDisplayFontFamily
-import com.justcircleprod.hhcloneem.core.presentation.ui.theme.White
+import com.justcircleprod.hhcloneem.R
+import com.justcircleprod.hhcloneem.core.presentation.theme.Grey4
+import com.justcircleprod.hhcloneem.core.presentation.theme.Red
+import com.justcircleprod.hhcloneem.core.presentation.theme.SFProDisplayFontFamily
+import com.justcircleprod.hhcloneem.core.presentation.theme.White
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
@@ -55,7 +54,7 @@ fun BottomNavigationBar(navController: NavController) {
                                     Text(
                                         text = item.badgeCount.toString(),
                                         fontFamily = SFProDisplayFontFamily,
-                                        fontSize = 8.sp,
+                                        fontSize = 10.sp,
                                         color = White
                                     )
                                 }
@@ -65,7 +64,7 @@ fun BottomNavigationBar(navController: NavController) {
                         Icon(
                             painter = painterResource(item.iconDrawableRes),
                             contentDescription = stringResource(item.titleStringRes),
-                            modifier = Modifier.size(26.dp)
+                            modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size))
                         )
                     }
                 },
@@ -74,15 +73,15 @@ fun BottomNavigationBar(navController: NavController) {
                         text = stringResource(item.titleStringRes),
                         fontFamily = SFProDisplayFontFamily,
                         maxLines = 1,
-                        fontSize = 10.sp
+                        fontSize = 12.sp
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.primary,
                     selectedTextColor = MaterialTheme.colorScheme.primary,
                     indicatorColor = Color.Transparent,
-                    unselectedIconColor = if (isSystemInDarkTheme()) Grey4 else Grey2,
-                    unselectedTextColor = if (isSystemInDarkTheme()) Grey4 else Grey2
+                    unselectedIconColor = Grey4,
+                    unselectedTextColor = Grey4
                 ),
                 onClick = {
                     navController.navigate(item.route) {

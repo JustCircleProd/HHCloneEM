@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_margin">19dp</dimen>
+    
+    <dimen name="default_icon_size">28dp</dimen>
+    
+    <dimen name="default_rounded_corner">10dp</dimen>
+    <dimen name="filters_button_rounded_corner">12dp</dimen>
+    
+</resources>

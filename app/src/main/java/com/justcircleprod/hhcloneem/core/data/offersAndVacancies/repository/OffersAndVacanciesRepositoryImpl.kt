@@ -15,7 +15,7 @@ class OffersAndVacanciesRepositoryImpl(
 
     override suspend fun getOffersAndVacancies(): Resource<Pair<List<OfferModel>, List<VacancyModel>>> {
         return withContext(Dispatchers.IO) {
-             try {
+            try {
                 val result = api.getOffersAndVacancies()
 
                 Resource.Success(

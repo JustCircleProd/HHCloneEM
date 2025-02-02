@@ -12,13 +12,18 @@ sealed class BottomNavigationItem(
     val badgeCount: Int? = null
 ) {
 
-    data object Search : BottomNavigationItem(Screen.SEARCH.name, R.drawable.icon_search, R.string.search)
+    data object Search :
+        BottomNavigationItem(Screen.SEARCH.name, R.drawable.icon_search, R.string.search)
 
-    data object Favourite : BottomNavigationItem(Screen.FAVOURITE.name, R.drawable.icon_favourite, R.string.favourite, 5)
+    data object Favourite :
+        BottomNavigationItem(Screen.FAVOURITE.name, R.drawable.icon_favourite, R.string.favourite)
 
-    data object Responses : BottomNavigationItem(Screen.RESPONSES.name, R.drawable.icon_responses, R.string.responses)
+    data object Responses :
+        BottomNavigationItem(Screen.RESPONSES.name, R.drawable.icon_responses, R.string.responses)
 
-    data object Messages : BottomNavigationItem(Screen.MESSAGES.name, R.drawable.icon_messages, R.string.messages)
+    data object Messages :
+        BottomNavigationItem(Screen.MESSAGES.name, R.drawable.icon_messages, R.string.messages)
 
-    data object Profile : BottomNavigationItem(Screen.PROFILE.name, R.drawable.icon_profile, R.string.profile)
+    data object Profile :
+        BottomNavigationItem(Screen.PROFILE.name, R.drawable.icon_profile, R.string.profile)
 }

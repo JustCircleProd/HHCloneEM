@@ -1,4 +1,4 @@
-package com.justcircleprod.hhcloneem.core.presentation.ui.theme
+package com.justcircleprod.hhcloneem.core.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.font.Font
