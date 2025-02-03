@@ -1,5 +1,6 @@
 package com.justcircleprod.hhcloneem.search.presentation.components
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,6 +16,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,7 +46,11 @@ import com.justcircleprod.hhcloneem.core.presentation.theme.SFProDisplayFontFami
 import com.justcircleprod.hhcloneem.core.presentation.theme.White
 
 @Composable
-fun SearchTopBar(modifier: Modifier) {
+fun SearchAndFiltersTopAppBar(
+    @StringRes searchHintStringRes: Int,
+    onBackButtonClick: (() -> Unit)? = null,
+    modifier: Modifier
+) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -59,7 +65,7 @@ fun SearchTopBar(modifier: Modifier) {
             cursorBrush = SolidColor(White),
             textStyle = TextStyle(
                 color = White,
-                fontSize = 15.sp,
+                fontSize = 17.sp,
                 fontFamily = SFProDisplayFontFamily
             ),
             singleLine = true,
@@ -82,48 +88,83 @@ fun SearchTopBar(modifier: Modifier) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(
-                    painterResource(R.drawable.icon_search),
-                    tint = Grey4,
-                    contentDescription = null,
-                    modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size))
-                )
+                if (onBackButtonClick == null) {
+                    SearchIcon()
+                } else {
+                    BackButton(onBackButtonClick)
+                }
 
                 Spacer(Modifier.width(10.dp))
 
                 Box(contentAlignment = Alignment.CenterStart) {
                     innerTextField()
 
-                    Text(
-                        text = stringResource(R.string.search_placeholder),
-                        maxLines = 1,
-                        fontSize = 15.sp,
-                        overflow = TextOverflow.Ellipsis,
-                        color = Grey4,
-                        modifier = Modifier.alpha(if (searchText.isEmpty()) 1f else 0f)
-                    )
+                    SearchHintText(searchHintStringRes, searchText)
                 }
             }
         }
 
         Spacer(Modifier.width(10.dp))
 
-        FilledIconButton(
-            shape = RoundedCornerShape(dimensionResource(R.dimen.filters_button_rounded_corner)),
-            colors = IconButtonDefaults.iconButtonColors(
-                containerColor = Grey2
-            ),
-            modifier = Modifier.size(48.dp),
-            onClick = {
+        FiltersButton()
+    }
+}
 
-            }
-        ) {
-            Icon(
-                painter = painterResource(R.drawable.icon_filters),
-                tint = White,
-                contentDescription = stringResource(R.string.filters),
-                modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size))
-            )
-        }
+@Composable
+fun SearchIcon() {
+    Icon(
+        painterResource(R.drawable.icon_search),
+        tint = Grey4,
+        contentDescription = null,
+        modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size))
+    )
+}
+
+@Composable
+private fun BackButton(onBackButtonClick: (() -> Unit)) {
+    IconButton(
+        onClick = onBackButtonClick,
+        modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size))
+    ) {
+        Icon(
+            painterResource(R.drawable.icon_back),
+            tint = White,
+            contentDescription = stringResource(R.string.back),
+            modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size))
+        )
+    }
+}
+
+@Composable
+private fun SearchHintText(
+    @StringRes searchHintStringRes: Int,
+    searchText: String
+) {
+    Text(
+        text = stringResource(searchHintStringRes),
+        maxLines = 1,
+        fontSize = 17.sp,
+        overflow = TextOverflow.Ellipsis,
+        color = Grey4,
+        modifier = Modifier.alpha(if (searchText.isEmpty()) 1f else 0f)
+    )
+}
+
+@Composable
+private fun FiltersButton() {
+    FilledIconButton(
+        shape = RoundedCornerShape(dimensionResource(R.dimen.filters_button_rounded_corner)),
+        colors = IconButtonDefaults.iconButtonColors(
+            containerColor = Grey2
+        ),
+        modifier = Modifier.size(48.dp),
+        onClick = { }
+    ) {
+        Icon(
+            painter = painterResource(R.drawable.icon_filters),
+            tint = White,
+            contentDescription = stringResource(R.string.filters),
+            modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size))
+        )
     }
 }

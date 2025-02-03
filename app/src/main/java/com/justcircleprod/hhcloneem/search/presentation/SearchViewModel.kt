@@ -20,6 +20,8 @@ class SearchViewModel @Inject constructor(
 
     val vacancies = MutableStateFlow<List<VacancyModel>>(emptyList())
 
+    val showAllVacancies = MutableStateFlow(false)
+
     init {
         loadOffersAndVacancies()
     }
@@ -33,5 +35,9 @@ class SearchViewModel @Inject constructor(
                 vacancies.value = result.data.second
             }
         }
+    }
+
+    fun setShowAllVacancies(value: Boolean) {
+        showAllVacancies.value = value
     }
 }

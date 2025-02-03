@@ -16,7 +16,11 @@ sealed class BottomNavigationItem(
         BottomNavigationItem(Screen.SEARCH.name, R.drawable.icon_search, R.string.search)
 
     data object Favourite :
-        BottomNavigationItem(Screen.FAVOURITE.name, R.drawable.icon_favourite, R.string.favourite)
+        BottomNavigationItem(
+            Screen.FAVOURITE.name,
+            R.drawable.icon_favourite_outlined,
+            R.string.favourite
+        )
 
     data object Responses :
         BottomNavigationItem(Screen.RESPONSES.name, R.drawable.icon_responses, R.string.responses)

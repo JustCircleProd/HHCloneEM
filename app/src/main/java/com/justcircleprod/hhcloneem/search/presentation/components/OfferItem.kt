@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,42 +56,12 @@ fun OfferItem(offerModel: OfferModel) {
                 .fillMaxSize()
                 .padding(horizontal = 10.dp, vertical = 12.dp)
         ) {
-            val offerType = if (offerModel.id != null) OfferType.getById(offerModel.id) else null
-
-            if (offerType != null) {
-                Card(
-                    shape = CircleShape,
-                    colors = CardDefaults.cardColors(containerColor = offerType.iconBackgroundCardColor),
-                    modifier = Modifier.size(38.dp)
-                ) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            painter = painterResource(offerType.iconDrawableRes),
-                            modifier = Modifier.size(28.dp),
-                            tint = offerType.iconColor,
-                            contentDescription = null
-                        )
-                    }
-                }
-
-                Spacer(Modifier.height(19.dp))
-            } else {
-                Spacer(Modifier.height(57.dp))
-            }
-
+            OfferItemIcon(offerModel.id)
 
             var titleTextLineCount by remember { mutableIntStateOf(0) }
 
-            Text(
-                text = offerModel.title.trim(),
-                color = White,
-                fontSize = 16.sp,
-                lineHeight = 20.sp,
-                fontWeight = FontWeight.Medium,
-                fontFamily = SFProDisplayFontFamily,
+            OfferItemTitleText(
+                title = offerModel.title,
                 maxLines = if (offerModel.buttonText != null) 2 else 3,
                 onTextLayout = {
                     titleTextLineCount = it.lineCount
@@ -99,25 +70,81 @@ fun OfferItem(offerModel: OfferModel) {
 
             Spacer(Modifier.height(1.dp))
 
-            if (offerModel.buttonText != null) {
-                Text(
-                    text = offerModel.buttonText.trim(),
-                    color = Green,
-                    fontSize = 16.sp,
-                    lineHeight = 20.sp,
-                    fontWeight = FontWeight.Medium,
-                    fontFamily = SFProDisplayFontFamily
-                )
-            } else if (titleTextLineCount == 2) {
-                Text(
-                    text = "",
-                    color = Color.Transparent,
-                    fontSize = 16.sp,
-                    lineHeight = 20.sp,
-                    fontWeight = FontWeight.Medium,
-                    fontFamily = SFProDisplayFontFamily
+            OfferItemButton(
+                buttonText = offerModel.buttonText,
+                offerTitleTextLineCount = titleTextLineCount
+            )
+        }
+    }
+}
+
+@Composable
+fun OfferItemIcon(offerModelId: String?) {
+    // Get offerType by offerId or assign null if offerId is null
+    val offerType = if (offerModelId != null) OfferType.getById(offerModelId) else null
+
+    if (offerType != null) {
+        Card(
+            shape = CircleShape,
+            colors = CardDefaults.cardColors(containerColor = offerType.iconBackgroundCardColor),
+            modifier = Modifier.size(38.dp)
+        ) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(offerType.iconDrawableRes),
+                    modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size)),
+                    tint = offerType.iconColor,
+                    contentDescription = null
                 )
             }
         }
+
+        Spacer(Modifier.height(19.dp))
+    } else {
+        Spacer(Modifier.height(57.dp))
+    }
+}
+
+@Composable
+private fun OfferItemTitleText(
+    title: String,
+    maxLines: Int,
+    onTextLayout: (TextLayoutResult) -> Unit
+) {
+    Text(
+        text = title.trim(),
+        color = White,
+        fontSize = 16.sp,
+        lineHeight = 20.sp,
+        fontWeight = FontWeight.Medium,
+        fontFamily = SFProDisplayFontFamily,
+        maxLines = maxLines,
+        onTextLayout = onTextLayout
+    )
+}
+
+@Composable
+fun OfferItemButton(buttonText: String?, offerTitleTextLineCount: Int) {
+    if (buttonText != null) {
+        Text(
+            text = buttonText.trim(),
+            color = Green,
+            fontSize = 16.sp,
+            lineHeight = 20.sp,
+            fontWeight = FontWeight.Medium,
+            fontFamily = SFProDisplayFontFamily
+        )
+    } else if (offerTitleTextLineCount == 2) { // to keep the OfferItems the same size
+        Text(
+            text = "",
+            color = Color.Transparent,
+            fontSize = 16.sp,
+            lineHeight = 20.sp,
+            fontWeight = FontWeight.Medium,
+            fontFamily = SFProDisplayFontFamily
+        )
     }
 }
