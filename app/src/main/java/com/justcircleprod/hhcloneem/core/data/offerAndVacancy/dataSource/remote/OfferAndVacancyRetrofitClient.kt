@@ -1,16 +1,16 @@
-package com.justcircleprod.hhcloneem.core.data.offersAndVacancies.dataSource.remote
+package com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object OffersAndVacanciesRetrofitClient {
+object OfferAndVacancyRetrofitClient {
 
     private const val BASE_URL = "https://drive.usercontent.google.com/"
 
-    fun getInstance(): OffersAndVacanciesApi =
+    fun getInstance(): OfferAndVacancyApi =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(OffersAndVacanciesApi::class.java)
+            .create(OfferAndVacancyApi::class.java)
 }

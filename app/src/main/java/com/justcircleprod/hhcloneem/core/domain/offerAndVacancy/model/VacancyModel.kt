@@ -1,4 +1,4 @@
-package com.justcircleprod.hhcloneem.core.domain.offersAndVacancies.model
+package com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model
 
 data class VacancyModel(
     val id: String,

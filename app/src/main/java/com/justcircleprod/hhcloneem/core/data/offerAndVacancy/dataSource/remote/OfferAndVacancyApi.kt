@@ -1,11 +1,11 @@
-package com.justcircleprod.hhcloneem.core.data.offersAndVacancies.dataSource.remote
+package com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.remote
 
-import com.justcircleprod.hhcloneem.core.data.offersAndVacancies.response.OffersAndVacanciesResponseModel
+import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.response.OffersAndVacanciesResponseModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-interface OffersAndVacanciesApi {
+interface OfferAndVacancyApi {
 
     @GET("u/0/uc")
     suspend fun getOffersAndVacancies(

@@ -31,7 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.justcircleprod.hhcloneem.R
-import com.justcircleprod.hhcloneem.core.domain.offersAndVacancies.model.OfferModel
+import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.OfferModel
 import com.justcircleprod.hhcloneem.core.presentation.theme.Green
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey1
 import com.justcircleprod.hhcloneem.core.presentation.theme.SFProDisplayFontFamily

@@ -1,4 +1,4 @@
-package com.justcircleprod.hhcloneem.core.data.offersAndVacancies.response
+package com.justcircleprod.hhcloneem.core.data.offerAndVacancy.response
 
 data class OfferResponseModel(
     val id: String?,

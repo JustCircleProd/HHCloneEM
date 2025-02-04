@@ -1,9 +1,10 @@
 package com.justcircleprod.hhcloneem.di
 
-import com.justcircleprod.hhcloneem.core.data.offersAndVacancies.dataSource.remote.OffersAndVacanciesApi
-import com.justcircleprod.hhcloneem.core.data.offersAndVacancies.dataSource.remote.OffersAndVacanciesRetrofitClient
-import com.justcircleprod.hhcloneem.core.data.offersAndVacancies.repository.OffersAndVacanciesRepositoryImpl
-import com.justcircleprod.hhcloneem.core.domain.repository.OffersAndVacanciesRepository
+import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.remote.OfferAndVacancyApi
+import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.remote.OfferAndVacancyRetrofitClient
+import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.repository.OfferAndVacancyRepositoryImpl
+import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.OfferAndVacancyRepository
+import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase.GetVacanciesAndOffersUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,11 +17,16 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideOffersAndVacanciesApi(): OffersAndVacanciesApi =
-        OffersAndVacanciesRetrofitClient.getInstance()
+    fun provideOfferAndVacancyApi(): OfferAndVacancyApi =
+        OfferAndVacancyRetrofitClient.getInstance()
 
     @Singleton
     @Provides
-    fun provideOffersAndVacanciesRepository(api: OffersAndVacanciesApi): OffersAndVacanciesRepository =
-        OffersAndVacanciesRepositoryImpl(api)
+    fun provideOfferAndVacancyRepository(api: OfferAndVacancyApi): OfferAndVacancyRepository =
+        OfferAndVacancyRepositoryImpl(api)
+
+    @Singleton
+    @Provides
+    fun provideGetVacanciesAndOffersUseCase(offerAndVacancyRepository: OfferAndVacancyRepository): GetVacanciesAndOffersUseCase =
+        GetVacanciesAndOffersUseCase(offerAndVacancyRepository)
 }

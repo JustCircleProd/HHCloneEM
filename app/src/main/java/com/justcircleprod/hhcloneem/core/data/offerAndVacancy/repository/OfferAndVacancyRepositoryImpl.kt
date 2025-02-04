@@ -1,17 +1,17 @@
-package com.justcircleprod.hhcloneem.core.data.offersAndVacancies.repository
+package com.justcircleprod.hhcloneem.core.data.offerAndVacancy.repository
 
-import com.justcircleprod.hhcloneem.core.data.offersAndVacancies.dataSource.remote.OffersAndVacanciesApi
-import com.justcircleprod.hhcloneem.core.data.offersAndVacancies.mapper.mapToDomainModels
-import com.justcircleprod.hhcloneem.core.domain.offersAndVacancies.model.OfferModel
-import com.justcircleprod.hhcloneem.core.domain.offersAndVacancies.model.VacancyModel
-import com.justcircleprod.hhcloneem.core.domain.repository.OffersAndVacanciesRepository
+import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.remote.OfferAndVacancyApi
+import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.mapper.mapToDomainModels
+import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.OfferModel
+import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.VacancyModel
+import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.OfferAndVacancyRepository
 import com.justcircleprod.hhcloneem.core.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class OffersAndVacanciesRepositoryImpl(
-    private val api: OffersAndVacanciesApi
-) : OffersAndVacanciesRepository {
+class OfferAndVacancyRepositoryImpl(
+    private val api: OfferAndVacancyApi
+) : OfferAndVacancyRepository {
 
     override suspend fun getOffersAndVacancies(): Resource<Pair<List<OfferModel>, List<VacancyModel>>> {
         return withContext(Dispatchers.IO) {

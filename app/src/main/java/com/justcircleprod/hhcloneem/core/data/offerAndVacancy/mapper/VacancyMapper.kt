@@ -1,10 +1,10 @@
-package com.justcircleprod.hhcloneem.core.data.offersAndVacancies.mapper
+package com.justcircleprod.hhcloneem.core.data.offerAndVacancy.mapper
 
-import com.justcircleprod.hhcloneem.core.data.offersAndVacancies.response.VacancyResponseModel
-import com.justcircleprod.hhcloneem.core.domain.offersAndVacancies.model.AddressModel
-import com.justcircleprod.hhcloneem.core.domain.offersAndVacancies.model.ExperienceModel
-import com.justcircleprod.hhcloneem.core.domain.offersAndVacancies.model.SalaryModel
-import com.justcircleprod.hhcloneem.core.domain.offersAndVacancies.model.VacancyModel
+import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.response.VacancyResponseModel
+import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.AddressModel
+import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.ExperienceModel
+import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.SalaryModel
+import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.VacancyModel
 
 fun VacancyResponseModel.mapToDomainModel() =
     VacancyModel(
