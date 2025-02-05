@@ -17,11 +17,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
@@ -41,6 +40,7 @@ import java.util.Locale
 @Composable
 fun VacancyItem(
     vacancyModel: VacancyModel,
+    onClick: () -> Unit,
     onLikeButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -49,9 +49,8 @@ fun VacancyItem(
         colors = CardDefaults.cardColors(containerColor = Grey1),
         modifier = modifier
             .fillMaxWidth()
-            .clickable {
-
-            }
+            .clip(RoundedCornerShape(dimensionResource(R.dimen.default_rounded_corner)))
+            .clickable { onClick() }
     ) {
         Column(
             modifier = Modifier
@@ -128,9 +127,9 @@ private fun VacancyItemTitleText(title: String) {
 
 @Composable
 private fun VacancyItemLikeButton(isFavourite: Boolean, onClick: () -> Unit) {
-    IconButton(
-        modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size)),
-        onClick = onClick
+    ScalableIconButton(
+        onClick = onClick,
+        modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size))
     ) {
         Icon(
             painter = if (isFavourite) painterResource(R.drawable.icon_favourite_filled) else painterResource(
@@ -215,17 +214,15 @@ private fun VacancyItemPublishedDateText(publishedDateStr: String) {
 
 @Composable
 fun VacancyItemResponseButton() {
-    TextButton(
+    ScalableTextButton(
         shape = RoundedCornerShape(60.dp),
         colors = ButtonDefaults.textButtonColors(
             containerColor = Green,
             contentColor = White
         ),
         contentPadding = PaddingValues(vertical = 7.dp),
-        modifier = Modifier.fillMaxWidth(),
-        onClick = {
-
-        }
+        onClick = { },
+        modifier = Modifier.fillMaxWidth()
     ) {
         ButtonText2(text = stringResource(R.string.responde))
     }

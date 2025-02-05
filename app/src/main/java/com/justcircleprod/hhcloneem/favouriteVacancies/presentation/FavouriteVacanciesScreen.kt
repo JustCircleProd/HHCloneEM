@@ -17,15 +17,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.justcircleprod.hhcloneem.R
+import com.justcircleprod.hhcloneem.core.presentation.components.NavigationItem
 import com.justcircleprod.hhcloneem.core.presentation.components.Text1
 import com.justcircleprod.hhcloneem.core.presentation.components.Title2
 import com.justcircleprod.hhcloneem.core.presentation.components.VacancyItem
+import com.justcircleprod.hhcloneem.core.presentation.extensions.navigateSafety
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey3
 import com.justcircleprod.hhcloneem.core.presentation.theme.White
 
 @Composable
-fun FavouriteVacanciesScreen() {
+fun FavouriteVacanciesScreen(navController: NavController) {
     val favouriteVacanciesViewModel = hiltViewModel<FavouriteVacanciesViewModel>()
 
     val favouriteVacancies by favouriteVacanciesViewModel.favouriteVacancies.collectAsStateWithLifecycle()
@@ -48,6 +51,12 @@ fun FavouriteVacanciesScreen() {
         items(favouriteVacancies) {
             VacancyItem(
                 vacancyModel = it,
+                onClick = {
+                    navController.navigateSafety(
+                        currentRoute = NavigationItem.FavouriteVacancies.route,
+                        targetRoute = NavigationItem.VacancyDetails.route
+                    )
+                },
                 onLikeButtonClick = {
                     favouriteVacanciesViewModel.toggleFavouriteVacancy(it.id)
                 },

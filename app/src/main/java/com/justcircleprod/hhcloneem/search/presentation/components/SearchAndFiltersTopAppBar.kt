@@ -16,7 +16,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -39,6 +38,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.justcircleprod.hhcloneem.R
+import com.justcircleprod.hhcloneem.core.presentation.components.ScalableIconButton
 import com.justcircleprod.hhcloneem.core.presentation.components.Text1
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey2
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey4
@@ -122,7 +122,7 @@ fun SearchIcon() {
 
 @Composable
 private fun BackButton(onBackButtonClick: (() -> Unit)) {
-    IconButton(
+    ScalableIconButton(
         onClick = onBackButtonClick,
         modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size))
     ) {

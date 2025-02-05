@@ -1,5 +1,6 @@
 package com.justcircleprod.hhcloneem.search.presentation
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,7 +19,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -31,11 +31,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.justcircleprod.hhcloneem.R
 import com.justcircleprod.hhcloneem.core.presentation.components.ButtonText1
+import com.justcircleprod.hhcloneem.core.presentation.components.NavigationItem
+import com.justcircleprod.hhcloneem.core.presentation.components.ScalableTextButton
 import com.justcircleprod.hhcloneem.core.presentation.components.Text1
 import com.justcircleprod.hhcloneem.core.presentation.components.Title2
 import com.justcircleprod.hhcloneem.core.presentation.components.VacancyItem
+import com.justcircleprod.hhcloneem.core.presentation.extensions.navigateSafety
 import com.justcircleprod.hhcloneem.core.presentation.theme.Blue
 import com.justcircleprod.hhcloneem.core.presentation.theme.White
 import com.justcircleprod.hhcloneem.search.presentation.components.OfferItem
@@ -43,13 +47,17 @@ import com.justcircleprod.hhcloneem.search.presentation.components.SearchAndFilt
 import kotlinx.coroutines.launch
 
 @Composable
-fun SearchScreen() {
+fun SearchScreen(navController: NavController) {
     val searchViewModel = hiltViewModel<SearchViewModel>()
 
     val offers by searchViewModel.offers.collectAsStateWithLifecycle()
 
     val vacancies by searchViewModel.vacancies.collectAsStateWithLifecycle()
     val showAllVacancies by searchViewModel.showAllVacancies.collectAsStateWithLifecycle()
+
+    BackHandler {
+        if (showAllVacancies) searchViewModel.setShowAllVacancies(false)
+    }
 
     val lazyListState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -132,6 +140,12 @@ fun SearchScreen() {
             items(if (showAllVacancies) vacancies else vacancies.take(3)) {
                 VacancyItem(
                     vacancyModel = it,
+                    onClick = {
+                        navController.navigateSafety(
+                            currentRoute = NavigationItem.Search.route,
+                            targetRoute = NavigationItem.VacancyDetails.route
+                        )
+                    },
                     onLikeButtonClick = {
                         searchViewModel.toggleFavouriteVacancy(it.id)
                     },
@@ -170,17 +184,17 @@ private fun VacanciesForYouText() {
 
 @Composable
 private fun MoreVacanciesButton(vacanciesCount: Int, onClick: () -> Unit) {
-    TextButton(
+    ScalableTextButton(
         shape = RoundedCornerShape(10.dp),
         colors = ButtonDefaults.textButtonColors(
             containerColor = Blue,
             contentColor = White
         ),
         contentPadding = PaddingValues(vertical = 17.dp),
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = dimensionResource(R.dimen.screen_margin)),
-        onClick = onClick
     ) {
         ButtonText1(
             text = pluralStringResource(

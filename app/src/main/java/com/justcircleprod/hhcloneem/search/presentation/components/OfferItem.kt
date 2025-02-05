@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.dimensionResource
@@ -44,6 +45,7 @@ fun OfferItem(offerModel: OfferModel) {
         colors = CardDefaults.cardColors(containerColor = Grey1),
         modifier = Modifier
             .width(158.dp)
+            .clip(RoundedCornerShape(dimensionResource(R.dimen.default_rounded_corner)))
             .clickable {
                 uriHandler.openUri(offerModel.link)
             }

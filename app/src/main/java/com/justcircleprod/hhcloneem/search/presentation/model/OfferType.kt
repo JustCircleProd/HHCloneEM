@@ -18,7 +18,7 @@ enum class OfferType(
         id = "near_vacancies",
         iconBackgroundCardColor = DarkBlue,
         iconColor = Blue,
-        iconDrawableRes = R.drawable.icon_star
+        iconDrawableRes = R.drawable.icon_location
     ),
     LEVEL_UP_RESUME(
         id = "level_up_resume",
