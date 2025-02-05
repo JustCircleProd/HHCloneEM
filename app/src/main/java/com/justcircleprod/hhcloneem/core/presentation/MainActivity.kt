@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.justcircleprod.hhcloneem.core.presentation.components.NavigationItem
 import com.justcircleprod.hhcloneem.core.presentation.components.bottomNavigation.BottomNavigationBar
 import com.justcircleprod.hhcloneem.core.presentation.theme.HHCloneEMTheme
+import com.justcircleprod.hhcloneem.favouriteVacancies.presentation.FavouriteVacanciesScreen
 import com.justcircleprod.hhcloneem.search.presentation.SearchScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,8 +43,8 @@ class MainActivity : ComponentActivity() {
                             composable(NavigationItem.Search.route) {
                                 SearchScreen()
                             }
-                            composable(NavigationItem.Favourite.route) {
-
+                            composable(NavigationItem.FavouriteVacancies.route) {
+                                FavouriteVacanciesScreen()
                             }
                             composable(NavigationItem.Responses.route) {
 

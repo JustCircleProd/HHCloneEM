@@ -14,7 +14,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -27,14 +26,12 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextLayoutResult
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.justcircleprod.hhcloneem.R
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.OfferModel
+import com.justcircleprod.hhcloneem.core.presentation.components.text.Title4
 import com.justcircleprod.hhcloneem.core.presentation.theme.Green
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey1
-import com.justcircleprod.hhcloneem.core.presentation.theme.SFProDisplayFontFamily
 import com.justcircleprod.hhcloneem.core.presentation.theme.White
 import com.justcircleprod.hhcloneem.search.presentation.model.OfferType
 
@@ -114,13 +111,9 @@ private fun OfferItemTitleText(
     maxLines: Int,
     onTextLayout: (TextLayoutResult) -> Unit
 ) {
-    Text(
+    Title4(
         text = title.trim(),
         color = White,
-        fontSize = 16.sp,
-        lineHeight = 20.sp,
-        fontWeight = FontWeight.Medium,
-        fontFamily = SFProDisplayFontFamily,
         maxLines = maxLines,
         onTextLayout = onTextLayout
     )
@@ -129,22 +122,16 @@ private fun OfferItemTitleText(
 @Composable
 fun OfferItemButton(buttonText: String?, offerTitleTextLineCount: Int) {
     if (buttonText != null) {
-        Text(
+        Title4(
             text = buttonText.trim(),
             color = Green,
-            fontSize = 16.sp,
-            lineHeight = 20.sp,
-            fontWeight = FontWeight.Medium,
-            fontFamily = SFProDisplayFontFamily
+            maxLines = 1
         )
     } else if (offerTitleTextLineCount == 2) { // to keep the OfferItems the same size
-        Text(
+        Title4(
             text = "",
             color = Color.Transparent,
-            fontSize = 16.sp,
-            lineHeight = 20.sp,
-            fontWeight = FontWeight.Medium,
-            fontFamily = SFProDisplayFontFamily
+            maxLines = 1
         )
     }
 }

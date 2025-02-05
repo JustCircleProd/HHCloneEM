@@ -7,25 +7,36 @@ import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.VacancyMod
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.OfferAndVacancyRepository
 import com.justcircleprod.hhcloneem.core.util.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
 
 class OfferAndVacancyRepositoryImpl(
     private val api: OfferAndVacancyApi
 ) : OfferAndVacancyRepository {
 
-    override suspend fun getOffersAndVacancies(): Resource<Pair<List<OfferModel>, List<VacancyModel>>> {
-        return withContext(Dispatchers.IO) {
+    private val _offers = MutableStateFlow<Resource<List<OfferModel>>>(Resource.Loading())
+    override val offers: StateFlow<Resource<List<OfferModel>>> = _offers.asStateFlow()
+
+    private val _vacancies = MutableStateFlow<Resource<List<VacancyModel>>>(Resource.Loading())
+    override val vacancies: StateFlow<Resource<List<VacancyModel>>> = _vacancies.asStateFlow()
+
+    override suspend fun loadOffersAndVacanciesIfEmpty() {
+        withContext(Dispatchers.IO) {
+            if (_offers.value is Resource.Success && _vacancies.value is Resource.Success) return@withContext
+
             try {
+                _offers.value = Resource.Loading()
+                _vacancies.value = Resource.Loading()
+
                 val result = api.getOffersAndVacancies()
 
-                Resource.Success(
-                    Pair(
-                        result.offers.mapToDomainModels(),
-                        result.vacancies.mapToDomainModels()
-                    )
-                )
+                _offers.value = Resource.Success(result.offers.mapToDomainModels())
+                _vacancies.value = Resource.Success(result.vacancies.mapToDomainModels())
             } catch (e: Exception) {
-                Resource.Error(error = true)
+                _offers.value = Resource.Error()
+                _vacancies.value = Resource.Error()
             }
         }
     }

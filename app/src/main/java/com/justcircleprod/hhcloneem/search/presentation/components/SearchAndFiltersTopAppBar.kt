@@ -18,7 +18,6 @@ import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,6 +39,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.justcircleprod.hhcloneem.R
+import com.justcircleprod.hhcloneem.core.presentation.components.text.Text1
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey2
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey4
 import com.justcircleprod.hhcloneem.core.presentation.theme.SFProDisplayFontFamily
@@ -140,12 +140,11 @@ private fun SearchHintText(
     @StringRes searchHintStringRes: Int,
     searchText: String
 ) {
-    Text(
+    Text1(
         text = stringResource(searchHintStringRes),
-        maxLines = 1,
-        fontSize = 17.sp,
-        overflow = TextOverflow.Ellipsis,
         color = Grey4,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
         modifier = Modifier.alpha(if (searchText.isEmpty()) 1f else 0f)
     )
 }

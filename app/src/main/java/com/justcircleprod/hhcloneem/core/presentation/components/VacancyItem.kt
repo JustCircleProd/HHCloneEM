@@ -1,4 +1,4 @@
-package com.justcircleprod.hhcloneem.search.presentation.components
+package com.justcircleprod.hhcloneem.core.presentation.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +18,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,17 +26,19 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.justcircleprod.hhcloneem.R
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.VacancyModel
+import com.justcircleprod.hhcloneem.core.presentation.components.text.ButtonText2
+import com.justcircleprod.hhcloneem.core.presentation.components.text.Text1
+import com.justcircleprod.hhcloneem.core.presentation.components.text.Title2
+import com.justcircleprod.hhcloneem.core.presentation.components.text.Title3
+import com.justcircleprod.hhcloneem.core.presentation.components.text.Title4
 import com.justcircleprod.hhcloneem.core.presentation.theme.Blue
 import com.justcircleprod.hhcloneem.core.presentation.theme.Green
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey1
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey3
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey4
-import com.justcircleprod.hhcloneem.core.presentation.theme.SFProDisplayFontFamily
 import com.justcircleprod.hhcloneem.core.presentation.theme.White
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -45,6 +46,7 @@ import java.util.Locale
 @Composable
 fun VacancyItem(
     vacancyModel: VacancyModel,
+    onLikeButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -77,7 +79,7 @@ fun VacancyItem(
                     VacancyItemTitleText(vacancyModel.title)
                 }
 
-                VacancyItemLikeButton(vacancyModel.isFavorite)
+                VacancyItemLikeButton(vacancyModel.isFavorite, onLikeButtonClick)
             }
 
             if (vacancyModel.salary.short != null) {
@@ -88,13 +90,7 @@ fun VacancyItem(
 
             Spacer(Modifier.height(12.dp))
 
-            Text(
-                text = vacancyModel.address.town,
-                color = White,
-                fontSize = 17.sp,
-                lineHeight = 20.sp,
-                fontFamily = SFProDisplayFontFamily
-            )
+            VacancyItemTownText(vacancyModel.address.town)
 
             Spacer(Modifier.height(5.dp))
 
@@ -117,38 +113,29 @@ fun VacancyItem(
 
 @Composable
 private fun VacancyItemLookingNumberText(lookingNumber: Int) {
-    Text(
+    Title4(
         text = pluralStringResource(
             R.plurals.looking_number,
             lookingNumber,
             lookingNumber
         ),
-        color = Green,
-        fontSize = 16.sp,
-        lineHeight = 20.sp,
-        fontFamily = SFProDisplayFontFamily
+        color = Green
     )
 }
 
 @Composable
 private fun VacancyItemTitleText(title: String) {
-    Text(
-        text = title,
-        color = White,
-        fontSize = 19.sp,
-        lineHeight = 23.sp,
-        fontWeight = FontWeight.Medium,
-        fontFamily = SFProDisplayFontFamily
+    Title3(
+        text = title.trim(),
+        color = White
     )
 }
 
 @Composable
-private fun VacancyItemLikeButton(isFavourite: Boolean) {
+private fun VacancyItemLikeButton(isFavourite: Boolean, onClick: () -> Unit) {
     IconButton(
         modifier = Modifier.size(dimensionResource(R.dimen.default_icon_size)),
-        onClick = {
-
-        }
+        onClick = onClick
     ) {
         Icon(
             painter = if (isFavourite) painterResource(R.drawable.icon_favourite_filled) else painterResource(
@@ -165,25 +152,26 @@ private fun VacancyItemLikeButton(isFavourite: Boolean) {
 
 @Composable
 private fun VacancyItemSalaryText(salary: String) {
-    Text(
-        text = salary,
-        color = White,
-        fontSize = 24.sp,
-        lineHeight = 29.sp,
-        fontWeight = FontWeight.SemiBold,
-        fontFamily = SFProDisplayFontFamily
+    Title2(
+        text = salary.trim(),
+        color = White
     )
 }
 
 @Composable
-fun VacancyItemCompanyText(company: String) {
+private fun VacancyItemTownText(town: String) {
+    Text1(
+        text = town.trim(),
+        color = White
+    )
+}
+
+@Composable
+private fun VacancyItemCompanyText(company: String) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text = company,
-            color = White,
-            fontSize = 17.sp,
-            lineHeight = 20.sp,
-            fontFamily = SFProDisplayFontFamily
+        Text1(
+            text = company.trim(),
+            color = White
         )
 
         Spacer(Modifier.width(10.dp))
@@ -209,12 +197,9 @@ private fun VacancyItemExperienceText(experience: String) {
 
         Spacer(Modifier.width(10.dp))
 
-        Text(
-            text = experience,
-            color = White,
-            fontSize = 17.sp,
-            lineHeight = 20.sp,
-            fontFamily = SFProDisplayFontFamily
+        Text1(
+            text = experience.trim(),
+            color = White
         )
     }
 }
@@ -227,12 +212,9 @@ private fun VacancyItemPublishedDateText(publishedDateStr: String) {
     val publishedDate = inputFormat.parse(publishedDateStr) ?: return
     val publishedDateText = outputFormat.format(publishedDate)
 
-    Text(
+    Text1(
         text = stringResource(R.string.published_at, publishedDateText),
-        color = Grey3,
-        fontSize = 17.sp,
-        lineHeight = 20.sp,
-        fontFamily = SFProDisplayFontFamily
+        color = Grey3
     )
 }
 
@@ -250,12 +232,6 @@ fun VacancyItemResponseButton() {
 
         }
     ) {
-        Text(
-            text = stringResource(R.string.responde),
-            maxLines = 1,
-            fontSize = 17.sp,
-            lineHeight = 22.sp,
-            fontFamily = SFProDisplayFontFamily,
-        )
+        ButtonText2(text = stringResource(R.string.responde))
     }
 }

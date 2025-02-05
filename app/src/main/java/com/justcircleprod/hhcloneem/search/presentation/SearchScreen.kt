@@ -1,6 +1,5 @@
 package com.justcircleprod.hhcloneem.search.presentation
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,7 +18,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,21 +28,20 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.justcircleprod.hhcloneem.R
+import com.justcircleprod.hhcloneem.core.presentation.components.VacancyItem
+import com.justcircleprod.hhcloneem.core.presentation.components.text.ButtonText1
+import com.justcircleprod.hhcloneem.core.presentation.components.text.Text1
+import com.justcircleprod.hhcloneem.core.presentation.components.text.Title2
 import com.justcircleprod.hhcloneem.core.presentation.theme.Blue
-import com.justcircleprod.hhcloneem.core.presentation.theme.SFProDisplayFontFamily
 import com.justcircleprod.hhcloneem.core.presentation.theme.White
 import com.justcircleprod.hhcloneem.search.presentation.components.OfferItem
 import com.justcircleprod.hhcloneem.search.presentation.components.SearchAndFiltersTopAppBar
-import com.justcircleprod.hhcloneem.search.presentation.components.VacancyItem
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SearchScreen() {
     val searchViewModel = hiltViewModel<SearchViewModel>()
@@ -135,6 +132,9 @@ fun SearchScreen() {
             items(if (showAllVacancies) vacancies else vacancies.take(3)) {
                 VacancyItem(
                     vacancyModel = it,
+                    onLikeButtonClick = {
+                        searchViewModel.toggleFavouriteVacancy(it.id)
+                    },
                     modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.screen_margin))
                 )
             }
@@ -161,12 +161,9 @@ fun SearchScreen() {
 
 @Composable
 private fun VacanciesForYouText() {
-    Text(
+    Title2(
         text = stringResource(R.string.vacancies_for_you),
-        fontFamily = SFProDisplayFontFamily,
         color = White,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 24.sp,
         modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.screen_margin))
     )
 }
@@ -185,47 +182,34 @@ private fun MoreVacanciesButton(vacanciesCount: Int, onClick: () -> Unit) {
             .padding(horizontal = dimensionResource(R.dimen.screen_margin)),
         onClick = onClick
     ) {
-        Text(
+        ButtonText1(
             text = pluralStringResource(
                 R.plurals.more_vacancies,
                 vacanciesCount,
                 vacanciesCount
-            ),
-            maxLines = 1,
-            fontSize = 19.sp,
-            fontWeight = FontWeight.SemiBold,
-            lineHeight = 25.sp,
-            fontFamily = SFProDisplayFontFamily,
+            )
         )
     }
 }
 
 @Composable
 private fun VacanciesCountText(vacanciesCount: Int) {
-    Text(
+    Text1(
         text = pluralStringResource(
             R.plurals.vacancies,
             vacanciesCount,
             vacanciesCount
         ),
-        maxLines = 1,
         color = White,
-        fontSize = 17.sp,
-        lineHeight = 20.sp,
-        fontFamily = SFProDisplayFontFamily,
     )
 }
 
 @Composable
 private fun SortText() {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
+        Text1(
             text = stringResource(R.string.in_accordance),
-            maxLines = 1,
-            color = Blue,
-            fontSize = 17.sp,
-            lineHeight = 20.sp,
-            fontFamily = SFProDisplayFontFamily,
+            color = Blue
         )
 
         Spacer(Modifier.width(7.dp))

@@ -17,7 +17,7 @@ sealed class BottomNavigationItem(
 
     data object Favourite :
         BottomNavigationItem(
-            Screen.FAVOURITE.name,
+            Screen.FAVOURITE_VACANCIES.name,
             R.drawable.icon_favourite_outlined,
             R.string.favourite
         )
