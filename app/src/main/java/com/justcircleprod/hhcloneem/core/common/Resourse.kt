@@ -1,4 +1,4 @@
-package com.justcircleprod.hhcloneem.core.util
+package com.justcircleprod.hhcloneem.core.common
 
 sealed class Resource<T>(val data: T? = null, val error: Boolean = false) {
     class Success<T>(data: T) : Resource<T>(data = data)

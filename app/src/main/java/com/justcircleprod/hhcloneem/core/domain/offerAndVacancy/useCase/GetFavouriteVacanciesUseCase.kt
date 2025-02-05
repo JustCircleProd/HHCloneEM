@@ -1,9 +1,9 @@
 package com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase
 
+import com.justcircleprod.hhcloneem.core.common.Resource
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.VacancyModel
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.FavouriteVacancyRepository
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.OfferAndVacancyRepository
-import com.justcircleprod.hhcloneem.core.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject

@@ -29,11 +29,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.justcircleprod.hhcloneem.R
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.VacancyModel
-import com.justcircleprod.hhcloneem.core.presentation.components.text.ButtonText2
-import com.justcircleprod.hhcloneem.core.presentation.components.text.Text1
-import com.justcircleprod.hhcloneem.core.presentation.components.text.Title2
-import com.justcircleprod.hhcloneem.core.presentation.components.text.Title3
-import com.justcircleprod.hhcloneem.core.presentation.components.text.Title4
 import com.justcircleprod.hhcloneem.core.presentation.theme.Blue
 import com.justcircleprod.hhcloneem.core.presentation.theme.Green
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey1

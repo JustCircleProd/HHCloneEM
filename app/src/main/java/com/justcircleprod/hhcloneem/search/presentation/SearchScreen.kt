@@ -32,10 +32,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.justcircleprod.hhcloneem.R
+import com.justcircleprod.hhcloneem.core.presentation.components.ButtonText1
+import com.justcircleprod.hhcloneem.core.presentation.components.Text1
+import com.justcircleprod.hhcloneem.core.presentation.components.Title2
 import com.justcircleprod.hhcloneem.core.presentation.components.VacancyItem
-import com.justcircleprod.hhcloneem.core.presentation.components.text.ButtonText1
-import com.justcircleprod.hhcloneem.core.presentation.components.text.Text1
-import com.justcircleprod.hhcloneem.core.presentation.components.text.Title2
 import com.justcircleprod.hhcloneem.core.presentation.theme.Blue
 import com.justcircleprod.hhcloneem.core.presentation.theme.White
 import com.justcircleprod.hhcloneem.search.presentation.components.OfferItem

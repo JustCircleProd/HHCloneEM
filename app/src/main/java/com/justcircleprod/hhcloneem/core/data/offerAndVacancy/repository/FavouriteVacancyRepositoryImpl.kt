@@ -17,6 +17,10 @@ class FavouriteVacancyRepositoryImpl @Inject constructor(
         return favouriteVacancyDao.getAll().map { it.mapToDomainModels() }
     }
 
+    override fun getCount(): Flow<Int> {
+        return favouriteVacancyDao.getCount()
+    }
+
     override suspend fun isFavourite(vacancyId: String): Boolean {
         return favouriteVacancyDao.isFavourite(vacancyId)
     }

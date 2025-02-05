@@ -13,6 +13,9 @@ interface FavouriteVacancyDao {
     @Query("SELECT * FROM favourite_vacancies")
     fun getAll(): Flow<List<FavouriteVacancyEntity>>
 
+    @Query("SELECT COUNT(*) FROM favourite_vacancies")
+    fun getCount(): Flow<Int>
+
     @Query("SELECT EXISTS(SELECT 1 FROM favourite_vacancies WHERE vacancyId = :vacancyId)")
     suspend fun isFavourite(vacancyId: String): Boolean
 

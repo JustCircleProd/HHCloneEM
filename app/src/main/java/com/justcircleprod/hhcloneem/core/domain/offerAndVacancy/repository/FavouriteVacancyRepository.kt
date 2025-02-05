@@ -7,6 +7,8 @@ interface FavouriteVacancyRepository {
 
     fun getAll(): Flow<List<FavouriteVacancyModel>>
 
+    fun getCount(): Flow<Int>
+
     suspend fun isFavourite(vacancyId: String): Boolean
 
     suspend fun add(favouriteVacancyModel: FavouriteVacancyModel)

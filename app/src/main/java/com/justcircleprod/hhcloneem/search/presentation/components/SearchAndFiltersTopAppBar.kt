@@ -39,7 +39,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.justcircleprod.hhcloneem.R
-import com.justcircleprod.hhcloneem.core.presentation.components.text.Text1
+import com.justcircleprod.hhcloneem.core.presentation.components.Text1
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey2
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey4
 import com.justcircleprod.hhcloneem.core.presentation.theme.SFProDisplayFontFamily

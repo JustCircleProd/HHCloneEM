@@ -9,6 +9,7 @@ import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.repository.Favouri
 import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.repository.OfferAndVacancyRepositoryImpl
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.FavouriteVacancyRepository
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.OfferAndVacancyRepository
+import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase.GetFavouriteVacanciesCountUseCase
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase.GetFavouriteVacanciesUseCase
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase.GetVacanciesAndOffersUseCase
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase.ToggleFavouriteVacancyUseCase
@@ -70,4 +71,11 @@ object AppModule {
         favouriteVacancyRepository: FavouriteVacancyRepository
     ): ToggleFavouriteVacancyUseCase =
         ToggleFavouriteVacancyUseCase(favouriteVacancyRepository)
+
+    @Singleton
+    @Provides
+    fun provideGetFavouriteVacanciesCountUseCase(
+        favouriteVacancyRepository: FavouriteVacancyRepository
+    ): GetFavouriteVacanciesCountUseCase =
+        GetFavouriteVacanciesCountUseCase(favouriteVacancyRepository)
 }

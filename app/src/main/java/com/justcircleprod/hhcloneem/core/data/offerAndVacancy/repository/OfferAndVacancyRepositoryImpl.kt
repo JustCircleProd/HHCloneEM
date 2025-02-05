@@ -1,11 +1,11 @@
 package com.justcircleprod.hhcloneem.core.data.offerAndVacancy.repository
 
+import com.justcircleprod.hhcloneem.core.common.Resource
 import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.remote.OfferAndVacancyApi
 import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.mapper.mapToDomainModels
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.OfferModel
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.VacancyModel
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.OfferAndVacancyRepository
-import com.justcircleprod.hhcloneem.core.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

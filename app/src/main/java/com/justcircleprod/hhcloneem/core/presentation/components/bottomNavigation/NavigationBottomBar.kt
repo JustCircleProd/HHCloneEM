@@ -8,7 +8,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -16,23 +15,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.justcircleprod.hhcloneem.R
+import com.justcircleprod.hhcloneem.core.presentation.components.NumberText
+import com.justcircleprod.hhcloneem.core.presentation.components.TabText
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey4
 import com.justcircleprod.hhcloneem.core.presentation.theme.Red
-import com.justcircleprod.hhcloneem.core.presentation.theme.SFProDisplayFontFamily
 import com.justcircleprod.hhcloneem.core.presentation.theme.White
 
 @Composable
-fun BottomNavigationBar(navController: NavController) {
+fun NavigationBottomBar(
+    navController: NavController,
+    favouriteVacanciesCount: Int
+) {
     val navigationBarItems = listOf(
-        BottomNavigationItem.Search,
-        BottomNavigationItem.Favourite,
-        BottomNavigationItem.Responses,
-        BottomNavigationItem.Messages,
-        BottomNavigationItem.Profile
+        NavigationBottomBarItemModel.Search,
+        NavigationBottomBarItemModel.Favourite(badgeCount = favouriteVacanciesCount),
+        NavigationBottomBarItemModel.Responses,
+        NavigationBottomBarItemModel.Messages,
+        NavigationBottomBarItemModel.Profile
     )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -49,12 +51,10 @@ fun BottomNavigationBar(navController: NavController) {
                 icon = {
                     BadgedBox(
                         badge = {
-                            if (item.badgeCount != null) {
+                            if (item.badgeCount != null && item.badgeCount != 0) {
                                 Badge(containerColor = Red) {
-                                    Text(
+                                    NumberText(
                                         text = item.badgeCount.toString(),
-                                        fontFamily = SFProDisplayFontFamily,
-                                        fontSize = 10.sp,
                                         color = White
                                     )
                                 }
@@ -69,12 +69,7 @@ fun BottomNavigationBar(navController: NavController) {
                     }
                 },
                 label = {
-                    Text(
-                        text = stringResource(item.titleStringRes),
-                        fontFamily = SFProDisplayFontFamily,
-                        maxLines = 1,
-                        fontSize = 12.sp
-                    )
+                    TabText(text = stringResource(item.titleStringRes))
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.primary,

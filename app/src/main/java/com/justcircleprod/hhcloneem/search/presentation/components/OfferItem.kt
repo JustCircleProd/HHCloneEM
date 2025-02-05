@@ -29,7 +29,7 @@ import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.unit.dp
 import com.justcircleprod.hhcloneem.R
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.OfferModel
-import com.justcircleprod.hhcloneem.core.presentation.components.text.Title4
+import com.justcircleprod.hhcloneem.core.presentation.components.Title4
 import com.justcircleprod.hhcloneem.core.presentation.theme.Green
 import com.justcircleprod.hhcloneem.core.presentation.theme.Grey1
 import com.justcircleprod.hhcloneem.core.presentation.theme.White

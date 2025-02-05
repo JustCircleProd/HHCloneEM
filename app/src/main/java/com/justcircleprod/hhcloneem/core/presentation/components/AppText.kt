@@ -1,4 +1,4 @@
-package com.justcircleprod.hhcloneem.core.presentation.components.text
+package com.justcircleprod.hhcloneem.core.presentation.components
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -97,6 +97,39 @@ fun Text1(
         fontFamily = SFProDisplayFontFamily,
         fontSize = 17.sp,
         lineHeight = 20.sp,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun TabText(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        overflow = TextOverflow.Ellipsis,
+        maxLines = 1,
+        fontFamily = SFProDisplayFontFamily,
+        fontSize = 12.sp,
+        lineHeight = 13.sp,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun NumberText(
+    text: String,
+    color: Color,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        color = color,
+        maxLines = 1,
+        fontFamily = SFProDisplayFontFamily,
+        fontSize = 9.sp,
+        lineHeight = 10.sp,
         modifier = modifier
     )
 }
