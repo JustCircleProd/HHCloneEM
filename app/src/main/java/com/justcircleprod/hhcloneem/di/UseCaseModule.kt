@@ -1,12 +1,5 @@
 package com.justcircleprod.hhcloneem.di
 
-import android.content.Context
-import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.local.FavouriteVacancyDao
-import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.local.FavouriteVacancyDatabase
-import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.remote.OfferAndVacancyApi
-import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.remote.OfferAndVacancyRetrofitClient
-import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.repository.FavouriteVacancyRepositoryImpl
-import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.repository.OfferAndVacancyRepositoryImpl
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.FavouriteVacancyRepository
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.OfferAndVacancyRepository
 import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase.GetFavouriteVacanciesCountUseCase
@@ -16,38 +9,12 @@ import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase.ToggleFa
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
-
-    @Singleton
-    @Provides
-    fun provideOfferAndVacancyApi(): OfferAndVacancyApi =
-        OfferAndVacancyRetrofitClient.getInstance()
-
-    @Singleton
-    @Provides
-    fun provideOfferAndVacancyRepository(api: OfferAndVacancyApi): OfferAndVacancyRepository =
-        OfferAndVacancyRepositoryImpl(api)
-
-    @Singleton
-    @Provides
-    fun provideFavouriteVacancyDatabase(@ApplicationContext context: Context): FavouriteVacancyDatabase =
-        FavouriteVacancyDatabase.getInstance(context)
-
-    @Singleton
-    @Provides
-    fun provideFavouriteVacancyDao(favouriteVacancyDatabase: FavouriteVacancyDatabase): FavouriteVacancyDao =
-        favouriteVacancyDatabase.favouriteVacancyDao()
-
-    @Singleton
-    @Provides
-    fun provideFavouriteVacancyRepository(favouriteVacancyDao: FavouriteVacancyDao): FavouriteVacancyRepository =
-        FavouriteVacancyRepositoryImpl(favouriteVacancyDao)
+object UseCaseModule {
 
     @Singleton
     @Provides

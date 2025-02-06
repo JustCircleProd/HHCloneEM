@@ -18,7 +18,23 @@ class FavouriteVacanciesViewModel @Inject constructor(
     private val toggleFavouriteVacancyUseCase: ToggleFavouriteVacancyUseCase
 ) : ViewModel() {
 
-    val favouriteVacancies = getFavouriteVacanciesUseCase().map {
+    private val favouriteVacanciesFlow = getFavouriteVacanciesUseCase()
+
+    val isLoading = favouriteVacanciesFlow.map { it is Resource.Loading }
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(),
+            true
+        )
+
+    val loadingError = favouriteVacanciesFlow.map { it is Resource.Error }
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(),
+            false
+        )
+
+    val favouriteVacancies = favouriteVacanciesFlow.map {
         if (it is Resource.Success && it.data != null) {
             it.data
         } else {
@@ -31,6 +47,10 @@ class FavouriteVacanciesViewModel @Inject constructor(
     )
 
     init {
+        loadFavouriteVacancies()
+    }
+
+    fun loadFavouriteVacancies() {
         viewModelScope.launch {
             getFavouriteVacanciesUseCase.loadIfEmpty()
         }

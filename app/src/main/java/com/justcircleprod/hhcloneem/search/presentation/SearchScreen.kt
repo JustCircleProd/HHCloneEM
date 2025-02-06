@@ -34,6 +34,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.justcircleprod.hhcloneem.R
 import com.justcircleprod.hhcloneem.core.presentation.components.ButtonText1
+import com.justcircleprod.hhcloneem.core.presentation.components.LoadingErrorScreen
 import com.justcircleprod.hhcloneem.core.presentation.components.NavigationItem
 import com.justcircleprod.hhcloneem.core.presentation.components.ScalableTextButton
 import com.justcircleprod.hhcloneem.core.presentation.components.Text1
@@ -50,6 +51,9 @@ import kotlinx.coroutines.launch
 fun SearchScreen(navController: NavController) {
     val searchViewModel = hiltViewModel<SearchViewModel>()
 
+    val isLoading by searchViewModel.isLoading.collectAsStateWithLifecycle()
+    val loadingError by searchViewModel.loadingError.collectAsStateWithLifecycle()
+
     val offers by searchViewModel.offers.collectAsStateWithLifecycle()
 
     val vacancies by searchViewModel.vacancies.collectAsStateWithLifecycle()
@@ -62,6 +66,17 @@ fun SearchScreen(navController: NavController) {
     val lazyListState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
+    if (isLoading || loadingError) {
+        LoadingErrorScreen(
+            isLoading = isLoading,
+            loadingError = loadingError,
+            onClick = { searchViewModel.loadOffersAndVacancies() },
+            modifier = Modifier.padding(dimensionResource(R.dimen.default_space))
+        )
+
+        return
+    }
+
     Column(modifier = Modifier.fillMaxSize()) {
         if (showAllVacancies) {
             SearchAndFiltersTopAppBar(
@@ -70,16 +85,16 @@ fun SearchScreen(navController: NavController) {
                     searchViewModel.setShowAllVacancies(false)
                 },
                 modifier = Modifier
-                    .padding(top = dimensionResource(R.dimen.screen_margin))
-                    .padding(horizontal = dimensionResource(R.dimen.screen_margin))
+                    .padding(top = dimensionResource(R.dimen.default_space))
+                    .padding(horizontal = dimensionResource(R.dimen.default_space))
             )
 
-            Spacer(Modifier.height(19.dp))
+            Spacer(Modifier.height(dimensionResource(R.dimen.default_space)))
         }
 
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(19.dp),
-            contentPadding = PaddingValues(bottom = 10.dp),
+            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.default_space)),
+            contentPadding = PaddingValues(bottom = dimensionResource(R.dimen.lazy_column_default_bottom_padding)),
             state = lazyListState,
             modifier = Modifier.fillMaxSize()
         ) {
@@ -88,8 +103,8 @@ fun SearchScreen(navController: NavController) {
                     SearchAndFiltersTopAppBar(
                         searchHintStringRes = R.string.position_keywords,
                         modifier = Modifier
-                            .padding(top = dimensionResource(R.dimen.screen_margin))
-                            .padding(horizontal = dimensionResource(R.dimen.screen_margin))
+                            .padding(top = dimensionResource(R.dimen.default_space))
+                            .padding(horizontal = dimensionResource(R.dimen.default_space))
                     )
                 }
             }
@@ -100,14 +115,13 @@ fun SearchScreen(navController: NavController) {
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = dimensionResource(R.dimen.screen_margin)),
+                            .padding(horizontal = dimensionResource(R.dimen.default_space)),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         VacanciesCountText(vacancies.size)
 
                         SortText()
                     }
-
 
                     Spacer(Modifier.height(11.dp))
                 }
@@ -131,7 +145,7 @@ fun SearchScreen(navController: NavController) {
                 }
 
                 item {
-                    Spacer(Modifier.height(19.dp))
+                    Spacer(Modifier.height(dimensionResource(R.dimen.default_space)))
 
                     VacanciesForYouText()
                 }
@@ -149,7 +163,7 @@ fun SearchScreen(navController: NavController) {
                     onLikeButtonClick = {
                         searchViewModel.toggleFavouriteVacancy(it.id)
                     },
-                    modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.screen_margin))
+                    modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.default_space))
                 )
             }
 
@@ -178,7 +192,7 @@ private fun VacanciesForYouText() {
     Title2(
         text = stringResource(R.string.vacancies_for_you),
         color = White,
-        modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.screen_margin))
+        modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.default_space))
     )
 }
 
@@ -194,7 +208,7 @@ private fun MoreVacanciesButton(vacanciesCount: Int, onClick: () -> Unit) {
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = dimensionResource(R.dimen.screen_margin)),
+            .padding(horizontal = dimensionResource(R.dimen.default_space)),
     ) {
         ButtonText1(
             text = pluralStringResource(

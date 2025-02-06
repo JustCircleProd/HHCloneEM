@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="screen_margin">19dp</dimen>
+    <dimen name="default_space">19dp</dimen>
     
     <dimen name="default_icon_size">29dp</dimen>
     
     <dimen name="default_rounded_corner">10dp</dimen>
     <dimen name="filters_button_rounded_corner">12dp</dimen>
-    
+
+    <dimen name="lazy_column_default_bottom_padding">10dp</dimen>
 </resources>

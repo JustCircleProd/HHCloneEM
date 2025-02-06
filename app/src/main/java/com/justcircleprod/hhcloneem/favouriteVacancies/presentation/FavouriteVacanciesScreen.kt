@@ -14,11 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.justcircleprod.hhcloneem.R
+import com.justcircleprod.hhcloneem.core.presentation.components.LoadingErrorScreen
 import com.justcircleprod.hhcloneem.core.presentation.components.NavigationItem
 import com.justcircleprod.hhcloneem.core.presentation.components.Text1
 import com.justcircleprod.hhcloneem.core.presentation.components.Title2
@@ -31,15 +31,29 @@ import com.justcircleprod.hhcloneem.core.presentation.theme.White
 fun FavouriteVacanciesScreen(navController: NavController) {
     val favouriteVacanciesViewModel = hiltViewModel<FavouriteVacanciesViewModel>()
 
+    val isLoading by favouriteVacanciesViewModel.isLoading.collectAsStateWithLifecycle()
+    val loadingError by favouriteVacanciesViewModel.loadingError.collectAsStateWithLifecycle()
+
     val favouriteVacancies by favouriteVacanciesViewModel.favouriteVacancies.collectAsStateWithLifecycle()
 
+    if (isLoading || loadingError) {
+        LoadingErrorScreen(
+            isLoading = isLoading,
+            loadingError = loadingError,
+            onClick = { favouriteVacanciesViewModel.loadFavouriteVacancies() },
+            modifier = Modifier.padding(dimensionResource(R.dimen.default_space))
+        )
+
+        return
+    }
+
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(19.dp),
-        contentPadding = PaddingValues(bottom = 10.dp),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.default_space)),
+        contentPadding = PaddingValues(bottom = dimensionResource(R.dimen.lazy_column_default_bottom_padding)),
         modifier = Modifier.fillMaxSize()
     ) {
         item {
-            Spacer(Modifier.height(19.dp))
+            Spacer(Modifier.height(dimensionResource(R.dimen.default_space)))
 
             FavouriteText()
         }
@@ -60,7 +74,7 @@ fun FavouriteVacanciesScreen(navController: NavController) {
                 onLikeButtonClick = {
                     favouriteVacanciesViewModel.toggleFavouriteVacancy(it.id)
                 },
-                modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.screen_margin))
+                modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.default_space))
             )
         }
     }
@@ -71,7 +85,7 @@ private fun FavouriteText() {
     Title2(
         text = stringResource(R.string.favourite),
         color = White,
-        modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.screen_margin))
+        modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.default_space))
     )
 }
 
@@ -84,6 +98,6 @@ private fun VacanciesCountText(vacanciesCount: Int) {
             vacanciesCount
         ),
         color = Grey3,
-        modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.screen_margin))
+        modifier = Modifier.padding(horizontal = dimensionResource(R.dimen.default_space))
     )
 }

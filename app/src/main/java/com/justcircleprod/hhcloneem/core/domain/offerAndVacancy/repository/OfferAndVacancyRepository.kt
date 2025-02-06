@@ -6,9 +6,8 @@ import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.model.VacancyMod
 import kotlinx.coroutines.flow.StateFlow
 
 interface OfferAndVacancyRepository {
-
+    // to cache data within a session
     val offers: StateFlow<Resource<List<OfferModel>>>
-
     val vacancies: StateFlow<Resource<List<VacancyModel>>>
 
     suspend fun loadOffersAndVacanciesIfEmpty()

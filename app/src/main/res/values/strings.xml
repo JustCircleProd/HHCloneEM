@@ -6,7 +6,10 @@
     <string name="responses">Отклики</string>
     <string name="messages">Сообщения</string>
     <string name="profile">Профиль</string>
-    
+
+    <string name="loading_error">Ошибка загрузки</string>
+    <string name="refresh">Повторить</string>
+
     <string name="position_keywords">Должность, ключевые слова</string>
     <string name="position_on_suitable_vacancies">Должность по подходящим вакансиям</string>
     <string name="filters">Фильтры</string>

@@ -21,6 +21,20 @@ class SearchViewModel @Inject constructor(
 
     private val vacanciesAndOffersFlow = getVacanciesAndOffersUseCase()
 
+    val isLoading = vacanciesAndOffersFlow.map { it is Resource.Loading }
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(),
+            true
+        )
+
+    val loadingError = vacanciesAndOffersFlow.map { it is Resource.Error }
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(),
+            false
+        )
+
     val offers = vacanciesAndOffersFlow.map {
         if (it is Resource.Success && it.data != null) {
             it.data.first
@@ -48,6 +62,10 @@ class SearchViewModel @Inject constructor(
     val showAllVacancies = MutableStateFlow(false)
 
     init {
+        loadOffersAndVacancies()
+    }
+
+    fun loadOffersAndVacancies() {
         viewModelScope.launch {
             getVacanciesAndOffersUseCase.loadIfEmpty()
         }
