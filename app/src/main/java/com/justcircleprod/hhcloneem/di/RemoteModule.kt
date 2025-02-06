@@ -1,7 +1,7 @@
 package com.justcircleprod.hhcloneem.di
 
-import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.remote.OfferAndVacancyApi
-import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.remote.OfferAndVacancyRetrofitClient
+import com.justcircleprod.hhcloneem.data.offerAndVacancy.dataSource.remote.OfferAndVacancyApi
+import com.justcircleprod.hhcloneem.data.offerAndVacancy.dataSource.remote.OfferAndVacancyRetrofitClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

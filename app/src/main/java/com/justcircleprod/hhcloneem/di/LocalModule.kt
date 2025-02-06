@@ -1,8 +1,8 @@
 package com.justcircleprod.hhcloneem.di
 
 import android.content.Context
-import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.local.FavouriteVacancyDao
-import com.justcircleprod.hhcloneem.core.data.offerAndVacancy.dataSource.local.FavouriteVacancyDatabase
+import com.justcircleprod.hhcloneem.data.favouriteVacancy.dataSource.local.FavouriteVacancyDao
+import com.justcircleprod.hhcloneem.data.favouriteVacancy.dataSource.local.FavouriteVacancyDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

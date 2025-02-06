@@ -1,11 +1,11 @@
 package com.justcircleprod.hhcloneem.di
 
-import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.FavouriteVacancyRepository
-import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.repository.OfferAndVacancyRepository
-import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase.GetFavouriteVacanciesCountUseCase
-import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase.GetFavouriteVacanciesUseCase
-import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase.GetVacanciesAndOffersUseCase
-import com.justcircleprod.hhcloneem.core.domain.offerAndVacancy.useCase.ToggleFavouriteVacancyUseCase
+import com.justcircleprod.hhcloneem.domain.favouriteVacancy.repository.FavouriteVacancyRepository
+import com.justcircleprod.hhcloneem.domain.favouriteVacancy.useCase.GetFavouriteVacanciesCountUseCase
+import com.justcircleprod.hhcloneem.domain.favouriteVacancy.useCase.ToggleFavouriteVacancyUseCase
+import com.justcircleprod.hhcloneem.domain.offerAndVacancy.repository.OfferAndVacancyRepository
+import com.justcircleprod.hhcloneem.domain.useCase.GetFavouriteVacanciesUseCase
+import com.justcircleprod.hhcloneem.domain.useCase.GetVacanciesAndOffersUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -17,7 +17,7 @@
         android:theme="@style/Theme.HHCloneEM"
         tools:targetApi="31">
         <activity
-            android:name=".core.presentation.MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.HHCloneEM">
             <intent-filter>
